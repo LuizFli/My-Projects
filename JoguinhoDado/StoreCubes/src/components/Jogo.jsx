@@ -40,7 +40,7 @@ function Jogo() {
             </div>
             <div className='div-img'>
 
-                {saidos.length > 27 && <img className='imagens' src="./image/0.svg" alt="" onClick={rodarCubo} />}
+                {saidos.length > 27 && <img className='imagens' src="./image/0.svg" alt=""  />}
                 {saidos.length <= 27 && <img className='imagens' src={figures} alt="" onClick={rodarCubo} />}
 
 
