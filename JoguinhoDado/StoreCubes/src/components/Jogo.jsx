@@ -6,13 +6,22 @@ function Jogo() {
 
     const [figures, setFigures] = useState("./image/0.svg")
     const [images, setImages] = useState([])
+    const [saidos, setSaidos] = useState([])
 
 
     function rodarCubo() {
 
-        let image = Math.floor(Math.random() * 27) + 1;
+        
+        let image;
+        
+        do{
+            image = Math.floor(Math.random() * 27) + 1;
+
+        } while (saidos.includes(image) && saidos.length < 27);
+
         const newFigure = "./image/" + image + ".svg";
-    
+        
+        setSaidos(prevSaidos => [...prevSaidos, image]);
         setFigures(newFigure);
         setImages(prevImages => [...prevImages, newFigure])
         
@@ -27,12 +36,12 @@ function Jogo() {
             </div>
             <div className='div-img'>
 
-                <img className='imagens' src={figures} alt="" onClick={rodarCubo} />
+                {saidos.length < 27 && <img className='imagens' src={figures} alt="" onClick={rodarCubo} />}
 
 
             </div>
             <div className='map'>
-                {
+                {saidos.length < 27 &&
                     images.map((figures, i) => {
                         return (
                             <img key={i} className='im' src={figures} alt="" />
@@ -45,7 +54,7 @@ function Jogo() {
             </div>
             <div className='footer'>
 
-                <button className='btn' onClick={() => {setFigures("./image/0.svg"),setImages([])}}>Reset</button>
+                <button className='btn' onClick={() => {setFigures("./image/0.svg"),setImages([]),setSaidos([])}}>Reset</button>
 
             </div>
         </div>
